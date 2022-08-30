@@ -8,7 +8,6 @@ export default function Home() {
     
     return (<Layout>
         <div className="flex justify-center items-center">
-            {console.log(ee)}
             {tasks.length === 0 ? (<h1>No tasks yet</h1>) : (
                 <div className="w-7/12">
                     {tasks.map((task, i) => (
