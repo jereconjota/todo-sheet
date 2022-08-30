@@ -10,11 +10,11 @@ export const TaskProvider = ({ children }) => {
     const ee = 'this prop is an easter egg, good day!';
 
     //crud
-    const createTask = (title, description) => {
-        setTasks([...tasks, {title, description, id: uuid()}]);
+    const createTask = (title, description, status) => {
+        setTasks([...tasks, {title, description, status, id: uuid()}]);
     }
-    const updateTask = (id, title, description) => {
-        setTasks([...tasks.map(task => task.id === id ? {...task, title, description} : task)]);    
+    const updateTask = (id, title, description, status) => {
+        setTasks([...tasks.map(task => task.id === id ? {...task, title, description, status} : task)]);    
     }
     const deleteTask = (id) => setTasks([...tasks.filter((task) => task.id !== id)]);
 

@@ -19,6 +19,7 @@ export default function Home() {
                             <div className="w-full">
                                 <div className="flex justify-between">
                                     <h1 className="font-bold">{task.title}</h1>
+                                    <p>{task.status}</p>
                                     <button className="text-white bg-rose-600 hover:bg-rose-500 px-3 py-1 inline-flex items-center rounded-md"
                                         onClick={(e) => {
                                             e.stopPropagation();
@@ -28,7 +29,7 @@ export default function Home() {
                                     </button>
                                 </div>
                                 <p className="text-gray-300">{task.description}</p>
-                                <span className="text-gray-400">{task.is}</span>
+                                <span className="text-gray-400">{task.id}</span>
                             </div>
                         </div>
                     ))}

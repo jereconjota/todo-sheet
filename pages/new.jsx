@@ -5,6 +5,7 @@ import { useTasks } from '../context/TaskContext'
 
 const inititalState = {
     title: "",
+    status: "pendig",
     description: "",
 };
 
@@ -22,9 +23,9 @@ const TaskFormPage = () => {
         // push('/');
 
         if (!query.id) {
-            createTask(task.title, task.description);
+            createTask(task.title, task.description, task.status);
         } else {
-            updateTask(query.id, task.title, task.description);
+            updateTask(query.id, task.title, task.description, task.status);
         }
         push('/');
     }
@@ -44,12 +45,15 @@ const TaskFormPage = () => {
                 <form onSubmit={handleSubmit} className="bg-violet-500 p-10 h-2/4 rounded-lg">
                     <h1 className='text-3xl mb-7'>{query.id ? 'Update a task' : 'Task a Form'}</h1>
                     <input type="text" placeholder='write a title' name='title'
-                        className='bg-violet-400 focus:outline-none w-full py-3 px-4 my-5 rounded-lg placeholder-stone-600' onChange={handleChange}
+                        className='bg-violet-400 focus:outline-none w-full py-3 px-4 mb-5 rounded-lg placeholder-stone-600' onChange={handleChange}
                         value={task.title} />
+                    <input type="text" name='status'
+                        className='bg-violet-400 focus:outline-none w-full py-3 px-4 mb-5 rounded-lg placeholder-stone-600' onChange={handleChange}
+                        value='pending' disabled/>
                     <textarea name="description" id="" cols="30" rows="2" placeholder='write a description'
                         className='bg-violet-400 focus:outline-none w-full py-3 px-4 mb-5 rounded-lg  placeholder-stone-600' onChange={handleChange}
                         value={task.description} />
-                    <button className='bg-cyan-500 hover:bg-cyan-400 px-4 py-2 disabled:opacity-30 rounded-md' 
+                    <button className='bg-cyan-500 hover:bg-cyan-400 px-4 py-2 disabled:opacity-30 rounded-md'
                         disabled={!task.title || !task.description}>
                         Save</button>
                 </form>
