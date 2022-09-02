@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
-import Layout from '../components/Layout'
-import { useTasks } from '../context/TaskContext'
+import Layout from '../../components/LayoutContext'
+import { useTasks } from '../../context/TaskContext'
 
 const inititalState = {
     title: "",
@@ -27,7 +27,7 @@ const TaskFormPage = () => {
         } else {
             updateTask(query.id, task.title, task.description, task.status);
         }
-        push('/');
+        push('/use-context/');
     }
 
     useEffect(() => {
