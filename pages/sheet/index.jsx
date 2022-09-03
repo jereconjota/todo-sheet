@@ -6,8 +6,8 @@ import { useTasks } from "../../context/TaskContext"
 import { useEffect } from 'react'
 
 export default function Post({ tasks }) {
-    const { push } = useRouter();
-    const { tasksSheet, allTasksSheets } = useTasks();
+    const { push, reload } = useRouter();
+    const { allTasksSheets, deleteTaskSheet } = useTasks();
 
     useEffect(() => {
         if (tasks.length > 0){
@@ -18,6 +18,21 @@ export default function Post({ tasks }) {
             allTasksSheets(tasks);
         }
     }, [tasks]);
+
+
+    const deleteTask = (index, id) => {
+        const options = {
+            method: 'DELETE',
+        }
+        fetch(`/api/sheet/delete-sheet-row/${index}`, options)
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data)
+                deleteTaskSheet(id);
+                reload();
+            });
+    }
+
 
 
 
@@ -38,7 +53,7 @@ export default function Post({ tasks }) {
                                         <button className="text-white bg-rose-600 hover:bg-rose-500 px-3 py-1 inline-flex items-center rounded-md"
                                             onClick={(e) => {
                                                 e.stopPropagation();
-                                                deleteTask(task.id);
+                                                deleteTask(i, task.id);
                                             }}>
                                             delete
                                         </button>

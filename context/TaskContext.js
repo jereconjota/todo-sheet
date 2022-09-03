@@ -10,7 +10,6 @@ export const TaskProvider = ({ children }) => {
     const ee = 'this prop is an easter egg, good day!';
     
     //GOOGLE SHEET
-    const [tasksFromSheet, setTasksFromSheet] = useState([]);
     const [tasksSheet, setTasksSheet] = useState([]);
 
     // fetch('/api/get-sheet-content')
@@ -34,14 +33,13 @@ export const TaskProvider = ({ children }) => {
 
 
     //crud sheet
-    const createTaskSheets = (id, created_at, title, description, status) => {
-        setTasksFromSheet([...tasksFromSheet, { id, created_at, title, description, status }]);
-    }
     const allTasksSheets = (tasks) => {
         setTasksSheet(tasks);
     }
+    const deleteTaskSheet = (id) => setTasksSheet([...tasks.filter((task) => task.id !== id)]);
+
     return (
-        <TaskContext.Provider value={{ tasks, ee, createTask, updateTask, deleteTask, tasksFromSheet, createTaskSheets, tasksSheet, allTasksSheets}}>
+        <TaskContext.Provider value={{ tasks, ee, createTask, updateTask, deleteTask, tasksSheet, allTasksSheets, deleteTaskSheet}}>
             {children}
         </TaskContext.Provider> 
     );

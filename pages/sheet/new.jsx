@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
 import Layout from '../../components/LayoutSheet'
-
+import { useTasks } from "../../context/TaskContext"
 
 
 const inititalState = {
@@ -12,6 +12,8 @@ const inititalState = {
 
 const TaskFormPage = () => {
     const [task, setTask] = useState(inititalState);
+    const { tasksSheet } = useTasks();
+
     const { push, query } = useRouter();
 
     const handleChange = (e) => setTask({ ...task, [e.target.name]: e.target.value });
@@ -30,7 +32,7 @@ const TaskFormPage = () => {
                 method: 'POST',
                 body: JSON.stringify(params),
             }
-            fetch('/api/set-sheet-row', options )
+            fetch('/api/sheet/set-sheet-row', options )
                 .then((response) => response.json())
                 .then((data) => {
                     console.log(data)
@@ -44,7 +46,7 @@ const TaskFormPage = () => {
 
     useEffect(() => {
         if (query.id) {
-            const taskFound = tasks.find((task) => task.id == query.id);
+            const taskFound = tasksSheet.find((task) => task.id == query.id);
             if (taskFound) {
                 setTask({ title: taskFound.title, description: taskFound.description });
             }
