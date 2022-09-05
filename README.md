@@ -1,34 +1,43 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Simple ToDo app 
+### Used NextJS with Google Spreadsheets as Database
 
-## Getting Started
+First of all, you need create your project on google cloud, you can visit through this [link](https://console.developers.google.com/projectcreate) for that.
 
-First, run the development server:
+On APIs & Services page, enable  [Google Sheets API](https://console.cloud.google.com/apis/api/sheets.googleapis.com).
+After that, you need create your credentials (Service Account) on [Credencials page](https://console.cloud.google.com/iam-admin/serviceaccounts/create). Copy the mail you'll see under Service Account.
+
+On Service Account page, click on ADD KEY, choose JSON as type. Then your credentials will be automatically downloaded. This contain the credencials to connect the next app.
+
+Now you can create a new spreadsheet, and add this header << id, created_at, title, description, status >>, then, shere with service account mail you copied before.
+
+### Environment variables
+
+Complete you .env file with the keys on JSON file downloaded.
+You can get the spreadsheet id on the url ( htps://docs.google.com/spreadsheets/d/__1IciJtr0y46tAaVQMQJr9KVEdkwgOFMXQosURItkQSRw__/edit )
+
+```
+GOOGLE_SHEETS_PRIVATE_KEY=[YOUR KEY]
+GOOGLE_SHEETS_CLIENT_EMAIL=[YOUR ACCOUNT EMAIL]
+SPREADSHEET_ID=[YOU CAN GET THIS ON URL OF YOUR SHEETS]
+SPREADSHEET_NAME=[SHEET NAME]
+```
+
+Remember install dependencies 
+
+```bash
+npm i
+```
+
+and run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
 ```
+
+---
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+If you choose 'ToDo whitout persistence' (_/use-context/..._), your task will be lost when you refresh the page.
+If you choose 'ToDo with google sheets' (_/sheets/..._), your task will be saved on your google spreadsheet.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.

@@ -2,8 +2,6 @@ import { google } from 'googleapis';
 
 export async function getSheetContent() {
     try {
-        const range = 'A1:J9';
-
         // const auth = await google.auth.getClient({ scopes: ['https://www.googleapis.com/auth/spreadsheets'] });
         //Auth jwt
         const target = ["https://www.googleapis.com/auth/spreadsheets"];
