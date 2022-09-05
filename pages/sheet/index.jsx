@@ -4,21 +4,34 @@ import Layout from "../../components/LayoutSheet";
 import { useRouter } from "next/router";
 import { useTasks } from "../../context/TaskContext"
 import { useEffect } from 'react'
+import NProgress from "nprogress";
 
 export default function Post({ tasks }) {
-    const { push, reload } = useRouter();
+    const router = useRouter();
     const { allTasksSheets, deleteTaskSheet } = useTasks();
 
     useEffect(() => {
-        if (tasks.length > 0){
-            // tasks.map((item) => {
-            //     console.log(item)
-            //     // createTaskSheets(item.id, item.created_at, item.title, item.description, item.status)
-            // })
+        if (tasks.length > 0) {
             allTasksSheets(tasks);
         }
     }, [tasks]);
 
+    useEffect(() => {
+        const handleRouteChange = (url) => {
+            console.log(url);
+            NProgress.start();
+        };
+
+        router.events.on("routeChangeStart", handleRouteChange);
+
+        router.events.on("routeChangeComplete", () => NProgress.done());
+
+        router.events.on("routeChangeError", () => NProgress.done());
+
+        return () => {
+            router.events.off("routeChangeStart", handleRouteChange);
+        };
+    }, []);
 
     const deleteTask = (index, id) => {
         const options = {
@@ -29,7 +42,7 @@ export default function Post({ tasks }) {
             .then((data) => {
                 console.log(data)
                 deleteTaskSheet(id);
-                reload();
+                router.reload();
             });
     }
 
@@ -39,12 +52,12 @@ export default function Post({ tasks }) {
     return (
         <Layout>
             <div className="flex justify-center items-center">
-                { tasks.length === 0 ? (<h1>No tasks yet</h1>) : (
+                {tasks.length === 0 ? (<h1>No tasks yet</h1>) : (
                     <div className="w-7/12">
                         {tasks.map((task, i) => (
                             <div className="bg-violet-500 cursor-pointer px-20 py-5 m-2 flex justify-start items-center rounded-lg"
                                 key={i}
-                                onClick={() => push(`/sheet/edit/${task.id}`)}>
+                                onClick={() => router.push(`/sheet/edit/${task.id}`)}>
                                 <span className="text-5xl mr-5">{i + 1}</span>
                                 <div className="w-full">
                                     <div className="flex justify-between">
@@ -73,13 +86,19 @@ export default function Post({ tasks }) {
 
 
 export async function getServerSideProps({ query }) {
-
     const rows = await getSheetContent();
-
     return {
         props: {
             tasks: rows.slice(1, rows.length), // remove sheet header
         }
     }
-
 }
+// export async function getStaticProps(context) {
+//     const rows = await getSheetContent();
+//     return {
+//         props: {
+//             tasks: rows.slice(1, rows.length), // remove sheet header
+//         },
+//         revalidate: 1, // In seconds
+//     };
+// }

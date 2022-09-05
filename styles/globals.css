@@ -6,3 +6,16 @@ body {
     background-color: rgb(196 181 253);
     color: rgb(41 37 36);
 }
+
+
+.progress-bar {
+    background-color: rgb(41 37 36) !important;
+  }
+  #nprogress .bar {
+    background: rgb(41 37 36) !important;
+  }
+  
+  #nprogress .spinner-icon {
+    border-top-color: rgb(41 37 36);
+    border-left-color: rgb(41 37 36);
+  }

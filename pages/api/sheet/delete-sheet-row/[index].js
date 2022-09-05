@@ -3,13 +3,12 @@ import { google } from 'googleapis';
 export default async function deleteSheetRow(req, res) {
     try {
         console.log(req.query.index);
-        const index = req.query.index === "0" ? 2 : parseInt(req.query.index) + 1;
-
+        const index = parseInt(req.query.index) + 2;
+        console.log(index);
         const valueInputOption = 'USER_ENTERED';
         const auth = await google.auth.getClient({ scopes: ['https://www.googleapis.com/auth/spreadsheets'] });
         const sheets = google.sheets({ version: 'v4', auth });
         const range = `A${index}:E${index}`;
-
 
         //POST https://sheets.googleapis.com/v4/spreadsheets/{spreadsheetId}/values/{range}:clear  //BORRA CONTENIDO SIN BORRAR FILA
         // const response = await sheets.spreadsheets.values.clear({
