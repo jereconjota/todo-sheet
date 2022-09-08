@@ -23,8 +23,8 @@ export default function Home() {
                                         onClick={(e) => {
                                             e.stopPropagation();
                                             deleteTask(task.id);
-                                        }}>
-                                        delete
+                                        }}
+                                        id="deleteTask">Delete
                                     </button>
                                 </div>
                                 <p className="text-gray-300">{task.description}</p>

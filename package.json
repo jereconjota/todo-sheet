@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "cypress": "cypress open"
   },
   "dependencies": {
     "google-auth-library": "^8.4.0",
@@ -19,6 +20,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.8",
+    "cypress": "^10.7.0",
     "eslint": "8.23.0",
     "eslint-config-next": "12.2.5",
     "postcss": "^8.4.16",

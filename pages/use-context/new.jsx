@@ -42,10 +42,10 @@ const TaskFormPage = () => {
     return (
         <Layout>
             <div className="flex justify-center items-center h-full">
-                <form onSubmit={handleSubmit} className="bg-violet-500 p-10 h-2/4 rounded-lg">
+                <form id='taskform' onSubmit={handleSubmit} className="bg-violet-500 p-10 h-2/4 rounded-lg taskform">
                     <h1 className='text-3xl mb-7'>{query.id ? 'Update a task' : 'Task a Form'}</h1>
                     <input type="text" placeholder='write a title' name='title'
-                        className='bg-violet-400 focus:outline-none w-full py-3 px-4 mb-5 rounded-lg placeholder-stone-600' onChange={handleChange}
+                        className='title bg-violet-400 focus:outline-none w-full py-3 px-4 mb-5 rounded-lg placeholder-stone-600' onChange={handleChange}
                         value={task.title} />
                     <input type="text" name='status'
                         className='bg-violet-400 focus:outline-none w-full py-3 px-4 mb-5 rounded-lg placeholder-stone-600' onChange={handleChange}
@@ -53,7 +53,7 @@ const TaskFormPage = () => {
                     <textarea name="description" id="" cols="30" rows="2" placeholder='write a description'
                         className='bg-violet-400 focus:outline-none w-full py-3 px-4 mb-5 rounded-lg  placeholder-stone-600' onChange={handleChange}
                         value={task.description} />
-                    <button className='bg-cyan-500 hover:bg-cyan-400 px-4 py-2 disabled:opacity-30 rounded-md'
+                    <button type='submit' className='bg-cyan-500 hover:bg-cyan-400 px-4 py-2 disabled:opacity-30 rounded-md' name='taskFormSubmit' 
                         disabled={!task.title || !task.description}>
                         Save</button>
                 </form>
