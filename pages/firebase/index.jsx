@@ -3,14 +3,14 @@ import { useTasks } from "../../context/TaskContext"
 import { useRouter } from "next/router";
 
 export default function Home() {
-    const { tasks, deleteTask, ee } = useTasks();
+    const { tasksFirebase, deleteTaskFirebase, ee } = useTasks();
     const { push } = useRouter();
     
     return (<Layout path={'/firebase'}>
         <div className="flex justify-center items-center">
-            {tasks.length === 0 ? (<h1>No tasks yet</h1>) : (
+            {tasksFirebase.length === 0 ? (<h1>No tasks yet</h1>) : (
                 <div className="w-7/12">
-                    {tasks.map((task, i) => (
+                    {tasksFirebase.map((task, i) => (
                         <div className="bg-violet-500 cursor-pointer px-20 py-5 m-2 flex justify-start items-center rounded-lg"
                             key={i}
                             onClick={() => push(`/use-context/edit/${task.id}`)}>
@@ -22,7 +22,7 @@ export default function Home() {
                                     <button className="text-white bg-rose-600 hover:bg-rose-500 px-3 py-1 inline-flex items-center rounded-md"
                                         onClick={(e) => {
                                             e.stopPropagation();
-                                            deleteTask(task.id);
+                                            deleteTaskFirebase(task.id);
                                         }}
                                         id="deleteTask">Delete
                                     </button>
@@ -34,7 +34,7 @@ export default function Home() {
                     ))}
                 </div>
             )}
-            {tasks.length === 5 ?? console.log(ee)}
+            {tasksFirebase.length === 5 ?? console.log(ee)}
         </div>
     </Layout >
     )

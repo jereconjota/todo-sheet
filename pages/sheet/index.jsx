@@ -8,13 +8,13 @@ import NProgress from "nprogress";
 
 export default function Post({ tasks }) {
     const router = useRouter();
-    const { allTasksSheets, deleteTaskSheet } = useTasks();
+    const { setTasksSheets, deleteTaskSheet } = useTasks();
 
     useEffect(() => {
         if (tasks.length > 0) {
-            allTasksSheets(tasks);
+            setTasksSheets(tasks);
         }
-    }, [tasks]);
+    }, [setTasksSheets ,tasks]);
 
     useEffect(() => {
         const handleRouteChange = (url) => {
@@ -31,7 +31,7 @@ export default function Post({ tasks }) {
         return () => {
             router.events.off("routeChangeStart", handleRouteChange);
         };
-    }, []);
+    }, [router.events]);
 
     const deleteTask = (index, id) => {
         const options = {
