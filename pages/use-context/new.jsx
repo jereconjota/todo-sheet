@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
-import Layout from '../../components/LayoutContext'
+import Layout from '../../components/Layout'
 import { useTasks } from '../../context/TaskContext'
 
 const inititalState = {
@@ -40,7 +40,7 @@ const TaskFormPage = () => {
     }, [query.id]);
 
     return (
-        <Layout>
+        <Layout path={'/use-context'}>
             <div className="flex justify-center items-center h-full">
                 <form id='taskform' onSubmit={handleSubmit} className="bg-violet-500 p-10 h-2/4 rounded-lg taskform">
                     <h1 className='text-3xl mb-7'>{query.id ? 'Update a task' : 'Task a Form'}</h1>

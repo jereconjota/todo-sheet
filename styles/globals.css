@@ -19,3 +19,8 @@ body {
     border-top-color: rgb(41 37 36);
     border-left-color: rgb(41 37 36);
   }
+
+  .option {
+    width: 300px;
+    text-align: center;
+  }

@@ -22,6 +22,9 @@ SPREADSHEET_ID=[YOU CAN GET THIS ON URL OF YOUR SHEETS]
 SPREADSHEET_NAME=[SHEET NAME]
 ```
 
+---
+### Run the project
+
 Remember install dependencies 
 
 ```bash
@@ -34,10 +37,22 @@ and run the development server:
 npm run dev
 ```
 
----
-
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 If you choose 'ToDo whitout persistence' (_/use-context/..._), your task will be lost when you refresh the page.
 If you choose 'ToDo with google sheets' (_/sheets/..._), your task will be saved on your google spreadsheet.
 
+
+
+---
+
+### Testing
+
+This project use cypress for testing.
+
+```bash
+npm run dev
+&&
+npm run cyress
+```
+after that, you can see the cypress interface and select _E2E testing_ testing type. Select chrome browser and go to _cypress/e2e/integration/app.spec.cy.js_ and run the test.

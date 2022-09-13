@@ -1,6 +1,6 @@
 // import { google } from 'googleapis';
 import { getSheetContent } from '../api/sheetContent';
-import Layout from "../../components/LayoutSheet";
+import Layout from "../../components/Layout";
 import { useRouter } from "next/router";
 import { useTasks } from "../../context/TaskContext"
 import { useEffect } from 'react'
@@ -46,11 +46,8 @@ export default function Post({ tasks }) {
             });
     }
 
-
-
-
     return (
-        <Layout>
+        <Layout path={'/sheet'}>
             <div className="flex justify-center items-center">
                 {tasks.length === 0 ? (<h1>No tasks yet</h1>) : (
                     <div className="w-7/12">

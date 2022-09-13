@@ -12,17 +12,9 @@ export const TaskProvider = ({ children }) => {
     //GOOGLE SHEET
     const [tasksSheet, setTasksSheet] = useState([]);
 
-    // fetch('/api/get-sheet-content')
-    // .then((response) => response.json())
-    // .then((data) => {
-    //     console.log(data)
-    //     data.map((item) => {
-    //         setTasks([...tasks, item]);
-    //     })
-    // });
 
 
-    //crud
+    //crud without persistence
     const createTask = (title, description, status) => {
         setTasks([...tasks, {title, description, status, id: uuid()}]);
     }
@@ -32,11 +24,15 @@ export const TaskProvider = ({ children }) => {
     const deleteTask = (id) => setTasks([...tasks.filter((task) => task.id !== id)]);
 
 
-    //crud sheet
+    //crud google sheet
     const allTasksSheets = (tasks) => {
         setTasksSheet(tasks);
     }
     const deleteTaskSheet = (id) => setTasksSheet([...tasks.filter((task) => task.id !== id)]);
+
+
+    //crud firebase
+
 
     return (
         <TaskContext.Provider value={{ tasks, ee, createTask, updateTask, deleteTask, tasksSheet, allTasksSheets, deleteTaskSheet}}>

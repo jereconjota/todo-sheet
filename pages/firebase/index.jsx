@@ -6,7 +6,7 @@ export default function Home() {
     const { tasks, deleteTask, ee } = useTasks();
     const { push } = useRouter();
     
-    return (<Layout path={'/use-context'}>
+    return (<Layout path={'/firebase'}>
         <div className="flex justify-center items-center">
             {tasks.length === 0 ? (<h1>No tasks yet</h1>) : (
                 <div className="w-7/12">
