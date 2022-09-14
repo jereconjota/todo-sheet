@@ -1,11 +1,22 @@
 import Layout from "../../components/Layout";
 import { useTasks } from "../../context/TaskContext"
 import { useRouter } from "next/router";
+import { useEffect } from "react";
+
 
 export default function Home() {
-    const { tasksFirebase, deleteTaskFirebase, ee } = useTasks();
+
+    const { tasksFirebase, deleteTaskFirebase, ee, getTasksFirebase } = useTasks();
     const { push } = useRouter();
     
+    useEffect(() => {
+        (async () => {
+            await getTasksFirebase();
+        })()
+        console.log(tasksFirebase)
+    }, []);
+
+
     return (<Layout path={'/firebase'}>
         <div className="flex justify-center items-center">
             {tasksFirebase.length === 0 ? (<h1>No tasks yet</h1>) : (
@@ -13,8 +24,8 @@ export default function Home() {
                     {tasksFirebase.map((task, i) => (
                         <div className="bg-violet-500 cursor-pointer px-20 py-5 m-2 flex justify-start items-center rounded-lg"
                             key={i}
-                            onClick={() => push(`/use-context/edit/${task.id}`)}>
-                            <span className="text-5xl mr-5">{i + 1}</span>
+                            onClick={() => push(`/firebase/edit/${task.id}`)}>
+                            <span className="text-5xl mr-5">{i+1}</span>
                             <div className="w-full">
                                 <div className="flex justify-between">
                                     <h1 className="font-bold">{task.title}</h1>

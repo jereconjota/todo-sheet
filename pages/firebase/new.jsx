@@ -31,7 +31,7 @@ const TaskFormPage = () => {
         if (query.id) {
             const taskFound = tasksFirebase.find((task) => task.id == query.id);
             if (taskFound) {
-                setTask({ title: taskFound.title, description: taskFound.description });
+                setTask({ title: taskFound.title, description: taskFound.description, status: taskFound.status });
             }
         }
     }, [query.id]);
