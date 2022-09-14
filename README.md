@@ -21,6 +21,31 @@ GOOGLE_SHEETS_CLIENT_EMAIL=[YOUR ACCOUNT EMAIL]
 SPREADSHEET_ID=[YOU CAN GET THIS ON URL OF YOUR SHEETS]
 SPREADSHEET_NAME=[SHEET NAME]
 ```
+---
+### UPDATE Using firebase
+
+You can use firebase instead of google sheets, you need create a new project on [firebase console](https://console.firebase.google.com/), then create a new realtime database, and add this rules:
+
+```
+{
+  "rules": {
+    ".read": true,
+    ".write": true
+  }
+}
+```
+
+Then, you need create a new web app, and copy the config object, and add this to your .env file:
+
+```
+FIREBASE_API_KEY: [YOUR API KEY],
+FIREBASE_AUTH_DOMAIN: [YOUR AUTH DOMAIN],
+FIREBASE_STORAGE_BUCKET : [YOUR STORAGE BUCKET],
+FIREBASE_MESSAGING_SENDER_ID : [YOUR MESSAGING SENDER ID],
+FIREBASE_APP_ID : [YOUR APP ID],
+FIREBASE_MEASUREMENT_ID : [YOUR MEASUREMENT ID]
+```
+
 
 ---
 ### Run the project

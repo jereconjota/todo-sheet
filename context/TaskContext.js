@@ -1,31 +1,6 @@
 import { createContext, useContext, useState } from "react";
 import { v4 as uuid } from "uuid";
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////
-//////////// Firebase config ///////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getDatabase, ref, onValue, onChildAdded, onChildChanged, query, orderByChild, set, push, remove, update } from 'firebase/database';
-const firebaseConfig = {
-  apiKey: "AIzaSyCmx_R50VCavyWiPu3g4mlQvwsmKpEcr6A",
-  authDomain: "todo-fee66.firebaseapp.com",
-  projectId: "todo-fee66",
-  storageBucket: "todo-fee66.appspot.com",
-  messagingSenderId: "528682745584",
-  appId: "1:528682745584:web:6f01b4cfa3077299c54c35",
-  measurementId: "G-F15H972X5W"
-};
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const db = getDatabase();
-const refTasks = ref(db, 'tasks');
-const queryTasks = query(refTasks, orderByChild('timestamp'));
-////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////'
-
-
+import { db, refTasks, queryTasks, onValue, set, push, remove, update, ref } from "../pages/api/firebase";
 
 const TaskContext = createContext();
 
@@ -59,8 +34,8 @@ export const TaskProvider = ({ children }) => {
     const [tasksFirebase, setTasksFirebase] = useState([]);
     //////////////////////////  FIREBASE CRUD  ////////////////////////////
     const getTasksFirebase = async () => {
-        onValue(queryTasks, (snapshot) => {
-            const data = snapshot.val();
+        await onValue(queryTasks, async (snapshot) => {
+            const data = await snapshot.val();
             console.log('onValue', data);
             //objets to array with key
             const tasks = [];
@@ -90,7 +65,6 @@ export const TaskProvider = ({ children }) => {
         remove(ref(db, `tasks/${id}`));
         setTasksFirebase([...tasksFirebase.filter((task) => task.id !== id)])
     };
-
 
 
 

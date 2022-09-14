@@ -5,7 +5,7 @@ import { useTasks } from '../../context/TaskContext'
 
 const inititalState = {
     title: "",
-    status: "pendig",
+    status: "pending",
     description: "",
 };
 

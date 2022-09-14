@@ -13,7 +13,6 @@ export default function Home() {
         (async () => {
             await getTasksFirebase();
         })()
-        console.log(tasksFirebase)
     }, []);
 
 
