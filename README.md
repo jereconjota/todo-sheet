@@ -24,7 +24,7 @@ SPREADSHEET_NAME=[SHEET NAME]
 ---
 ### UPDATE Using firebase
 
-You can use firebase instead of google sheets, you need create a new project on [firebase console](https://console.firebase.google.com/), then create a new realtime database, and add this rules:
+You can use firebase instead of google sheets, first you need create a new project on [firebase console](https://console.firebase.google.com/), then create a new realtime database, and add this rules:
 
 ```
 {
@@ -65,8 +65,10 @@ npm run dev
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 If you choose 'ToDo whitout persistence' (_/use-context/..._), your task will be lost when you refresh the page.
+
 If you choose 'ToDo with google sheets' (_/sheets/..._), your task will be saved on your google spreadsheet.
 
+If you choose 'ToDo with firebase' (_/firebase/..._), your task will be saved on your firebase realtime database.
 
 
 ---
